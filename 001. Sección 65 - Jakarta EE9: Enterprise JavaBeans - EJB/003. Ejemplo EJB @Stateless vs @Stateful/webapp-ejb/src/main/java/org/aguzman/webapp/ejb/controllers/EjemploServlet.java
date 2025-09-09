@@ -1,6 +1,7 @@
 package org.aguzman.webapp.ejb.controllers;
 
 import jakarta.ejb.EJB;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,20 +11,20 @@ import org.aguzman.webapp.ejb.service.ServiceEjb;
 
 import java.io.IOException;
 
-@WebServlet("/index")// Paso 1: Mapea este Servlet a la URL "/index".
+@WebServlet("/index")
 public class EjemploServlet extends HttpServlet {
 
-    @EJB // Paso 2: Inyecta el EJB ServiceEjb.
+    @Inject//Paso 1
     private ServiceEjb service;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-     throws ServletException, IOException {
-    
-        // Paso 3: Invoca el método del EJB y guarda el resultado en un atributo de la solicitud.
-        req.setAttribute("saludo", service.saludar("andres"));
-        // Paso 4: Redirige la solicitud y la respuesta a la vista JSP.
-        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+    @Inject//Paso 2
+    private ServiceEjb service2;//Paso 3
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("\nService si es igual a service2 = " + service.equals(service2));//Paso 4
+        req.setAttribute("saludo", service.saludar("andres"));
+        req.setAttribute("saludo2", service2.saludar("john"));//Paso 5
+        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }
