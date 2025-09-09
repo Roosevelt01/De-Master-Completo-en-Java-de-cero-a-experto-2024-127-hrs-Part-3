@@ -27,3 +27,7 @@ public class EjemploServlet extends HttpServlet {
 
     }
 }
+
+20:05:13,177 INFO  [stdout] (default task-2) Imprimiendo dentro del ejb con instancia: org.aguzman.webapp.ejb.service.ServiceEjb@6d36f251
+20:05:14,055 INFO  [stdout] (default task-2) Imprimiendo dentro del ejb con instancia: org.aguzman.webapp.ejb.service.ServiceEjb@6d36f251
+20:05:14,945 INFO  [stdout] (default task-2) Imprimiendo dentro del ejb con instancia: org.aguzman.webapp.ejb.service.ServiceEjb@6d36f251
