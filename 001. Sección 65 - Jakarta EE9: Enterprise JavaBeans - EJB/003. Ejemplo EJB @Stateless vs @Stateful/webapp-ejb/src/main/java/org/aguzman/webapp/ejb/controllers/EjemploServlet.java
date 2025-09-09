@@ -23,7 +23,7 @@ public class EjemploServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Paso 3: Compara las dos instancias.
-        System.out.println("\nService si es igual a service2 = " + service.equals(service2));//Paso 4
+        System.out.println("\nService si es igual a service2 = " + service.equals(service2));
         req.setAttribute("saludo", service.saludar("andres"));
         req.setAttribute("saludo2", service2.saludar("john")); // Paso 4: Llama al método del segundo EJB.
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
