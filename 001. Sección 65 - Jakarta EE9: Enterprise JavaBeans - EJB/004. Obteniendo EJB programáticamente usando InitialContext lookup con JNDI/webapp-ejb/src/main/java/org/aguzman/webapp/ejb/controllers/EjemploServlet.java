@@ -30,7 +30,7 @@ public class EjemploServlet extends HttpServlet {
         ServiceEjb service2 = null; // Paso 2: Inicializa la segunda variable.
 
         try{
-             // Paso 3: Crea una instancia de InitialContext.
+            // Paso 3: Crea una instancia de InitialContext.
             InitialContext ctx = new InitialContext();
             
             // Paso 4: Realiza el lookup para obtener el EJB.
