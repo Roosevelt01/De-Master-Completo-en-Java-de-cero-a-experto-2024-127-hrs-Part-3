@@ -23,15 +23,21 @@ public class EjemploServlet extends HttpServlet {
 //    private ServiceEjb service2;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+    throws ServletException, IOException {
 
-        ServiceEjb service = null;//Paso 1
-        ServiceEjb service2 = null;//Paso 2
+        ServiceEjb service = null; // Paso 1: Inicializa las variables para la instancia del EJB.
+        ServiceEjb service2 = null; // Paso 2: Inicializa la segunda variable.
 
         try{
-            InitialContext ctx = new InitialContext();//Paso 3
-            service = (ServiceEjb) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjb");//Paso 4
-            service2 = (ServiceEjb) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjb"); //Paso 5
+             // Paso 3: Crea una instancia de InitialContext.
+            InitialContext ctx = new InitialContext();
+            
+            // Paso 4: Realiza el lookup para obtener el EJB.
+            service = (ServiceEjb) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjb");
+            
+            // Paso 5: Realiza otro lookup.
+            service2 = (ServiceEjb) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjb");
         }catch (NamingException e){
             e.printStackTrace();
         }
