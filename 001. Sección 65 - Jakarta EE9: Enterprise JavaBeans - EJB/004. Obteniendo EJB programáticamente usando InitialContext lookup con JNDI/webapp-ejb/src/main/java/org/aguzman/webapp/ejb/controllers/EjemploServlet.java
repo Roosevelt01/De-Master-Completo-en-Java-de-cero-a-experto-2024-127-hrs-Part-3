@@ -9,23 +9,36 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.aguzman.webapp.ejb.service.ServiceEjb;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import java.io.IOException;
 
 @WebServlet("/index")
 public class EjemploServlet extends HttpServlet {
 
-    @Inject // Paso 1: Se cambia @EJB por @Inject para utilizar el contexto de CDI.
-    private ServiceEjb service;
-
-    @Inject // Paso 2: Se inyecta una segunda instancia del mismo EJB.
-    private ServiceEjb service2;
+//    @Inject
+//    private ServiceEjb service;
+//
+//    @Inject
+//    private ServiceEjb service2;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Paso 3: Compara las dos instancias.
+
+        ServiceEjb service = null;//Paso 1
+        ServiceEjb service2 = null;//Paso 2
+
+        try{
+            InitialContext ctx = new InitialContext();//Paso 3
+            service = (ServiceEjb) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjb");//Paso 4
+            service2 = (ServiceEjb) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjb"); //Paso 5
+        }catch (NamingException e){
+            e.printStackTrace();
+        }
+
         System.out.println("\nService si es igual a service2 = " + service.equals(service2));
         req.setAttribute("saludo", service.saludar("andres"));
-        req.setAttribute("saludo2", service2.saludar("john")); // Paso 4: Llama al método del segundo EJB.
+        req.setAttribute("saludo2", service2.saludar("john"));
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }
