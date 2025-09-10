@@ -48,3 +48,10 @@ public class EjemploServlet extends HttpServlet {
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }
+
+02:47:59,520 INFO  [stdout] (default task-2)
+02:47:59,520 INFO  [stdout] (default task-2) Service si es igual a service2 = false
+02:47:59,523 INFO  [stdout] (default task-2) Valor del contado en m├®todo saludar 1
+02:47:59,524 INFO  [stdout] (default task-2) Imprimiendo dentro del ejb con instancia: org.aguzman.webapp.ejb.service.ServiceEjb@1273347e
+02:47:59,526 INFO  [stdout] (default task-2) Valor del contado en m├®todo saludar 1
+02:47:59,527 INFO  [stdout] (default task-2) Imprimiendo dentro del ejb con instancia: org.aguzman.webapp.ejb.service.ServiceEjb@36201b1a
