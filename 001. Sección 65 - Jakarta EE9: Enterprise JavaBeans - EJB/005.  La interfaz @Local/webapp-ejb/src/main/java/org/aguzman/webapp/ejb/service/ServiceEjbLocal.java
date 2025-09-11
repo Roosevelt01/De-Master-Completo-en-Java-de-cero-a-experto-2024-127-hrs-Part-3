@@ -6,3 +6,4 @@ import jakarta.ejb.Local;
 public interface ServiceEjbLocal {
     String saludar(String nombre); // Paso 2: Define el método de negocio.
 }
+

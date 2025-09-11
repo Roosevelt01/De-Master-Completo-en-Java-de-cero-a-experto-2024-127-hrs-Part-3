@@ -26,11 +26,18 @@ public class EjemploServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ServiceEjbLocal service = null;
+        // Paso 1: Se declara el objeto como la interfaz.
+        ServiceEjbLocal service = null; 
+
+        // Paso 2: Se declara el segundo objeto.
         ServiceEjbLocal service2 = null;
 
+
         try{
-            InitialContext ctx = new InitialContext();//Paso 3
+            InitialContext ctx = new InitialContext();
+            // Paso 3: El lookup se realiza utilizando el nombre de la clase concreta del EJB, pero el
+            // tipo de la interfaz que se espera. El servidor de aplicaciones se encarga de resolver la
+            // implementación correcta.
             service = (ServiceEjbLocal) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjbLocal");
             service2 = (ServiceEjbLocal) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjbLocal");
         }catch (NamingException e){
