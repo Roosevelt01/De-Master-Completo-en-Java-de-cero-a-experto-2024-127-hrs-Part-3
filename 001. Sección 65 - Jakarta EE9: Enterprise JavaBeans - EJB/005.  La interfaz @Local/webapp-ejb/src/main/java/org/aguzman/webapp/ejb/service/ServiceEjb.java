@@ -4,9 +4,8 @@ import jakarta.ejb.Stateful;
 import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.RequestScoped;
 
-@RequestScoped
 @Stateless //Probando con stateless y stateful
-public class ServiceEjb {
+public class ServiceEjb implements ServiceEjbLocal {
 
         private int contador;
 

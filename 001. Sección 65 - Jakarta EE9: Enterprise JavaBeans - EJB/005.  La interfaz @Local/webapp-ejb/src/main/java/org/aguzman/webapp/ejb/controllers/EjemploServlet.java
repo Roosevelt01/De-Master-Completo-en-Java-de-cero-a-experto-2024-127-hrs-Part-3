@@ -7,7 +7,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.aguzman.webapp.ejb.service.ServiceEjb;
+
+import org.aguzman.webapp.ejb.service.ServiceEjbLocal;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -16,28 +17,22 @@ import java.io.IOException;
 @WebServlet("/index")
 public class EjemploServlet extends HttpServlet {
 
-//    @Inject
-//    private ServiceEjb service;
-//
-//    @Inject
-//    private ServiceEjb service2;
+    //@Inject
+    //private ServiceEjbLocal service;
+    //
+    //@Inject
+    //private ServiceEjbLocal service2;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
-    throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ServiceEjb service = null; // Paso 1: Inicializa las variables para la instancia del EJB.
-        ServiceEjb service2 = null; // Paso 2: Inicializa la segunda variable.
+        ServiceEjbLocal service = null;
+        ServiceEjbLocal service2 = null;
 
         try{
-            // Paso 3: Crea una instancia de InitialContext.
-            InitialContext ctx = new InitialContext();
-            
-            // Paso 4: Realiza el lookup para obtener el EJB.
-            service = (ServiceEjb) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjb");
-            
-            // Paso 5: Realiza otro lookup.
-            service2 = (ServiceEjb) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjb");
+            InitialContext ctx = new InitialContext();//Paso 3
+            service = (ServiceEjbLocal) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjbLocal");
+            service2 = (ServiceEjbLocal) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjbLocal");
         }catch (NamingException e){
             e.printStackTrace();
         }
