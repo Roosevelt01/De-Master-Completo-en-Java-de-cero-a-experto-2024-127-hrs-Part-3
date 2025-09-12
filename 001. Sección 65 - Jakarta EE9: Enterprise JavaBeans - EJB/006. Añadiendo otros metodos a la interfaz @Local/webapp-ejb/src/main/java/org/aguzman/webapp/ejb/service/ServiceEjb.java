@@ -18,7 +18,7 @@ public class ServiceEjb implements ServiceEjbLocal {
         return "Hola que tal "+nombre;
     }
 
-    //Paso 1
+    // Paso 1: Implementación del método listar().
     @Override
     public List<Producto> listar() {
 
@@ -29,7 +29,7 @@ public class ServiceEjb implements ServiceEjbLocal {
         return productos;
     }
 
-    //Paso 2
+    // Paso 2: Implementación del método crear().
     @Override
     public Producto crear(Producto producto) {
         System.out.println("Guardando producto..."+producto);
