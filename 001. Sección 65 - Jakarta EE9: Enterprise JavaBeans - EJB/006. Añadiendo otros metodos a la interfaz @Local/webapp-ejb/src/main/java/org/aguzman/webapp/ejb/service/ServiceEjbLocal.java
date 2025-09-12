@@ -1,9 +1,13 @@
 package org.aguzman.webapp.ejb.service;
 
 import jakarta.ejb.Local;
+import org.aguzman.webapp.ejb.models.Producto;
 
-@Local // Paso 1: Anotación obligatoria que marca esta interfaz como local.
+import java.util.List;
+
+@Local
 public interface ServiceEjbLocal {
-    String saludar(String nombre); // Paso 2: Define el método de negocio.
+    String saludar(String nombre);
+    List<Producto> listar();//Paso 1
+    Producto crear(Producto producto);//Paso 2
 }
-

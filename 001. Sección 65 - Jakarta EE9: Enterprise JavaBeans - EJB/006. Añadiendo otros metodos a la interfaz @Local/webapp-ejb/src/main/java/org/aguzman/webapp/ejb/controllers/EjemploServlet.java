@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import org.aguzman.webapp.ejb.models.Producto;
 import org.aguzman.webapp.ejb.service.ServiceEjbLocal;
 
 import javax.naming.InitialContext;
@@ -26,27 +27,27 @@ public class EjemploServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // Paso 1: Se declara el objeto como la interfaz.
-        ServiceEjbLocal service = null; 
-
-        // Paso 2: Se declara el segundo objeto.
+        ServiceEjbLocal service = null;
         ServiceEjbLocal service2 = null;
 
-
         try{
-            InitialContext ctx = new InitialContext();
-            // Paso 3: El lookup se realiza utilizando el nombre de la clase concreta del EJB, pero el
-            // tipo de la interfaz que se espera. El servidor de aplicaciones se encarga de resolver la
-            // implementación correcta.
+            InitialContext ctx = new InitialContext();//Paso 3
             service = (ServiceEjbLocal) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjbLocal");
             service2 = (ServiceEjbLocal) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.aguzman.webapp.ejb.service.ServiceEjbLocal");
         }catch (NamingException e){
             e.printStackTrace();
         }
 
+        //Paso 1
+        Producto p = service.crear(new Producto("uvas"));
+
+        //Paso 2
+        System.out.println("Nuevo producto: " + p);
+
         System.out.println("\nService si es igual a service2 = " + service.equals(service2));
         req.setAttribute("saludo", service.saludar("andres"));
         req.setAttribute("saludo2", service2.saludar("john"));
+        req.setAttribute("listado", service.listar());// Paso 3
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }
