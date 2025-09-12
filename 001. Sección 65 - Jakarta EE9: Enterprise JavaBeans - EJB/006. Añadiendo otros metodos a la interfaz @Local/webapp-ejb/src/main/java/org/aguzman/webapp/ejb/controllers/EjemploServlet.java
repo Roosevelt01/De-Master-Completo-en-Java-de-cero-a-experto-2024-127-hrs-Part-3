@@ -38,16 +38,18 @@ public class EjemploServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        //Paso 1
+        // Paso 1: Se crea un nuevo producto en el cliente y se pasa al método remoto del EJB.
         Producto p = service.crear(new Producto("uvas"));
 
-        //Paso 2
+        // Paso 2: Se imprime en la consola del servidor para verificar que el objeto fue creado.
         System.out.println("Nuevo producto: " + p);
 
         System.out.println("\nService si es igual a service2 = " + service.equals(service2));
         req.setAttribute("saludo", service.saludar("andres"));
         req.setAttribute("saludo2", service2.saludar("john"));
-        req.setAttribute("listado", service.listar());// Paso 3
+        
+        // Paso 3: Se llama al método listar() y el resultado se guarda como un atributo de la solicitud.
+        req.setAttribute("listado", service.listar());
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }
