@@ -8,6 +8,9 @@ import java.util.List;
 @Local
 public interface ServiceEjbLocal {
     String saludar(String nombre);
-    List<Producto> listar();//Paso 1
-    Producto crear(Producto producto);//Paso 2
+    // Paso 1: Nuevo método para obtener una lista de productos.
+    List<Producto> listar();
+
+    // Paso 2: Nuevo método para crear un producto.
+    Producto crear(Producto producto);
 }
